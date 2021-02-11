@@ -1,0 +1,27 @@
+apiVersions: apps/v1
+kind: Deployment
+metadata:
+  name: mydep
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      key: value
+  template:
+    metadata:
+      labels:
+        key: value
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+      affinitry:
+        nodeAffinitry:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: foo
+                operator: In
+                values:
+                - bar
+
